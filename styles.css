@@ -1,0 +1,269 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Commissioner", sans-serif;
+  background-color: #fafafa;
+  width: 100%;
+  min-width: 375px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+a,
+a:hover,
+a:visited {
+  text-decoration: none;
+}
+p {
+  color: hsl(0, 0%, 48%);
+  font-size: 14px;
+  line-height: 1.8em;
+}
+.button {
+  font-weight: 700;
+  color: white;
+  background-color: hsl(176, 50%, 47%);
+  border-style: none;
+  padding: 20px 30px;
+  border-radius: 50px;
+}
+
+header {
+  background: url(images/image-hero-mobile.jpg) top no-repeat;
+  background-size: 100%;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 90px;
+}
+.logo {
+  z-index: 3;
+}
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 15px;
+  z-index: 3;
+}
+.hamburger:hover {
+  cursor: pointer;
+}
+.hamburger span {
+  background-color: white;
+  width: 15px;
+  height: 3px;
+  transform-origin: 0.1px 1.6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger__open span:nth-of-type(1) {
+  transform: rotate(45deg);
+}
+.hamburger__open span:nth-of-type(2) {
+  opacity: 0;
+}
+.hamburger__open span:nth-of-type(3) {
+  transform: rotate(-45deg);
+}
+.overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(black, rgba(122, 122, 122, 0.2));
+  position: absolute;
+  top: 0;
+  left: -500px;
+  z-index: 2;
+  display: none;
+  /* opacity: 0.5; */
+}
+.overlay--show {
+  display: block;
+  left: 0;
+}
+.desktop__links {
+  display: none;
+}
+.mobile__menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 90px;
+  left: -1090px;
+  transition: all 0.3s ease-in-out;
+  /* display: none; */
+  z-index: 3;
+}
+.mobile__menu--show {
+  /* display: block; */
+  left: 0;
+}
+
+.mobile__menu .nav__links {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  width: 90%;
+  border-radius: 10px;
+}
+.mobile__menu .nav__links a {
+  color: black;
+  font-weight: 700;
+  padding: 25px 0;
+  margin-left: 20px;
+  border-bottom: 1px solid rgba(122, 122, 122, 0.1);
+}
+main {
+  width: 90%;
+}
+
+section {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #f2f2f2;
+  /* text-align: center; */
+  padding: 40px 0;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+}
+.section__wrapper {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  top: -55px;
+}
+.intro .section__wrapper {
+  align-items: center;
+}
+.intro .master__logo {
+  /* margin-bottom: 10px; */
+  position: absolute;
+  top: -30px;
+}
+.intro h3 {
+  font-size: 20px;
+  margin-bottom: 30px;
+  width: 80%;
+}
+.intro p {
+  margin-bottom: 30px;
+}
+.clickable {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.clickable .button {
+  margin-right: 10px;
+  width: 100%;
+}
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.progress .backed,
+.total__backers,
+.days__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.progress h2 {
+  margin-bottom: 10px;
+}
+.num {
+  font-size: 30px;
+}
+.progress p {
+  margin-bottom: 20px;
+}
+.progress .line {
+  height: 1px;
+  width: 80px;
+  background-color: rgba(122, 122, 122, 0.5);
+}
+.progress .progress__bar {
+  width: 100%;
+  margin-bottom: 0px;
+}
+.pb__bkg {
+  width: 100%;
+  height: 12px;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+}
+
+.pb__fill {
+  width: 70%;
+  height: 12px;
+  background-color: hsl(176, 50%, 47%);
+  border-radius: 20px;
+}
+.about {
+}
+.about__title {
+  margin-bottom: 30px;
+}
+.about__text {
+  margin-bottom: 30px;
+}
+
+.model {
+  border-radius: 10px;
+  border: 2px solid #f4f4f4;
+  margin-bottom: 25px;
+  padding: 20px 20px;
+}
+.model__name {
+  margin-bottom: 10px;
+}
+.pledge {
+  font-weight: 500;
+  color: hsl(176, 50%, 47%);
+  margin-bottom: 10px;
+}
+.model__about {
+  margin-bottom: 40px;
+}
+.model .stock {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.model .stock .num {
+  margin-right: 10px;
+}
+.model .button {
+  padding: 18px 35px;
+}
+
+.hide {
+  display: none;
+}
