@@ -61,7 +61,15 @@
           </p>
           <div class="clickable">
             <button class="button">Back this project</button>
-            <a href="#"><img src="images/icon-bookmark.svg" alt="" /></a>
+            <div id="bookmark">
+              <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fill-rule="evenodd">
+                  <circle fill="#2F2F2F" cx="28" cy="28" r="28" />
+                  <path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z" />
+                </g>
+              </svg>
+              <p id="bkmk">Bookmark</p>
+            </div>
           </div>
         </div>
       </section>
@@ -72,13 +80,15 @@
             <div class="backed">
               <h2 class="num">$89,914</h2>
               <p>of $100,000 backed</p>
-              <div class="line"></div>
             </div>
+            <div class="line"></div>
+
             <div class="total__backers">
               <h2 class="num">5,007</h2>
               <p>total backers</p>
-              <div class="line"></div>
             </div>
+            <div class="line"></div>
+
             <div class="days__left">
               <h2 class="num">56</h2>
               <p>days left</p>
@@ -110,51 +120,69 @@
 
           <div class="all-models">
             <!-- model 1  -->
-            <div class="model model__1">
-              <h4 class="model__name">Bamboo Stand</h4>
-              <p class="pledge">Pledge $25 or more</p>
+            <div class="model" id="bamboo">
+              <div class="model__head">
+                <h4 class="model__name">Bamboo Stand</h4>
+                <p class="pledge">Pledge $25 or more</p>
+              </div>
+
               <p class="model__about">
                 You get an ergonomic stand made of natural bamboo. You've helped
                 us launch our promotional campaign, and you’ll be added to a
                 special Backer member list.
               </p>
-              <div class="stock">
-                <h2 class="num">101</h2>
-                <p>left</p>
+
+              <div class="model__cta">
+                <div class="stock">
+                  <h2 class="num">101</h2>
+                  <p>left</p>
+                </div>
+                <button class="button">Select Reward</button>
               </div>
-              <button class="button">Select Reward</button>
             </div>
 
             <!-- model 2  -->
-            <div class="model model__2">
-              <h4 class="model__name">Black Edition Stand</h4>
-              <p class="pledge">Pledge $75 or more</p>
+            <div class="model" id="black">
+              <div class="model__head">
+                <h4 class="model__name">Black Edition Stand</h4>
+                <p class="pledge">Pledge $75 or more</p>
+              </div>
+
               <p class="model__about">
                 You get a Black Special Edition computer stand and a personal
                 thank you. You’ll be added to our Backer member list. Shipping
                 is included.
               </p>
-              <div class="stock">
-                <h2 class="num">64</h2>
-                <p>left</p>
+
+              <div class="model__cta">
+                <div class="stock">
+                  <h2 class="num">64</h2>
+                  <p>left</p>
+                </div>
+                <button class="button">Select Reward</button>
               </div>
-              <button class="button">Select Reward</button>
             </div>
 
             <!-- model 3  -->
-            <div class="model model__3">
-              <h4 class="model__name">Mahogany Special Edition</h4>
-              <p class="pledge">Pledge $200 or more</p>
+            <div class="model" id="mahogany">
+              <div class="model__head">
+                <h4 class="model__name">Mahogany Special Edition</h4>
+                <p class="pledge">Pledge $200 or more</p>
+              </div>
+
               <p class="model__about">
                 You get two Special Edition Mahogany stands, a Backer T-Shirt,
                 and a personal thank you. You’ll be added to our Backer member
-                list. Shipping is included
+                list. Shipping is included.
               </p>
-              <div class="stock">
-                <h2 class="num">0</h2>
-                <p>left</p>
+
+              <div class="model__cta">
+                <div class="stock">
+                  <h2 class="num">0</h2>
+                  <p>left</p>
+                </div>
+                <button class="button">Out of Stock</button>
               </div>
-              <button class="button">Out of Stock</button>
             </div>
             <!-- all models ends here -->
           </div>
