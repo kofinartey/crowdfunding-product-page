@@ -1,8 +1,8 @@
 const hamburger = document.querySelector(".hamburger");
 const overlay = document.querySelector(".overlay");
 const mobileMenu = document.querySelector(".mobile__menu");
-// const bookmark = document.querySelector("#bookmark");
 
+//hamburger
 hamburger.addEventListener("click", () => {
   if (hamburger.classList.contains("hamburger__open")) {
     hamburger.classList.remove("hamburger__open");
