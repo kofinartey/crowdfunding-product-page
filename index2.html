@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Crowdfunding product page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="#"><img src="images/logo.svg" alt="" /></a>
+        </div>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="mobile__menu">
+          <div class="nav__links">
+            <a href="#">About</a>
+            <a href="#">Discover</a>
+            <a href="#">Get Started</a>
+          </div>
+        </div>
+
+        <div class="desktop__links">
+          <a href="#">About</a>
+          <a href="#">Discover</a>
+          <a href="#">Get Started</a>
+        </div>
+
+        <div class="overlay"></div>
+      </nav>
+    </header>
+    <main>
+      <section class="intro">
+        <div class="section__wrapper">
+          <div class="master__logo">
+            <img src="images/logo-mastercraft.svg" alt="" />
+          </div>
+          <h3>Mastercraft Bamboo Monitor Riser</h3>
+          <p>
+            A beautiful & handcrafted monitor stand to reduce neck and eye
+            strain.
+          </p>
+          <div class="clickable">
+            <button class="button" id="btn-back-project">
+              Back this project
+            </button>
+            <div id="bookmark">
+              <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fill-rule="evenodd">
+                  <circle fill="#2F2F2F" cx="28" cy="28" r="28" />
+                  <path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z" />
+                </g>
+              </svg>
+              <p id="bkmk">Bookmark</p>
+            </div>
+          </div>
+        </div>
+        <!-- intro ends -->
+      </section>
+
+      <section class="progress">
+        <div class="section__wrapper">
+          <div class="numbers">
+            <div class="backed">
+              <h2 class="num">$89,914</h2>
+              <p>of $100,000 backed</p>
+            </div>
+            <div class="line"></div>
+
+            <div class="total__backers">
+              <h2 class="num">5,007</h2>
+              <p>total backers</p>
+            </div>
+            <div class="line"></div>
+
+            <div class="days__left">
+              <h2 class="num">56</h2>
+              <p>days left</p>
+            </div>
+          </div>
+          <div class="progress__bar">
+            <div class="pb__bkg">
+              <div class="pb__fill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about">
+        <div class="section__wrapper">
+          <h3 class="about__title">About this project</h3>
+          <p class="about__text">
+            The Mastercraft Bamboo Monitor Riser is a sturdy and stylish
+            platform that elevates your screen to a more comfortable viewing
+            height. Placing your monitor at eye level has the potential to
+            improve your posture and make you more comfortable while at work,
+            helping you stay focused on the task at hand.
+          </p>
+          <p class="about__text">
+            Featuring artisan craftsmanship, the simplicity of design creates
+            extra desk space below your computer to allow notepads, pens, and
+            USB sticks to be stored under the stand.
+          </p>
+
+          <div class="all-items">
+            <!-- items in about to be generated from javascript -->
+          </div>
+        </div>
+        <!-- about section ends here -->
+      </section>
+
+      <!-- ====== MODAL (BACK PROJECT) ====== -->
+      <section class="modal" id="back-project">
+        <div class="section__wrapper">
+          <div class="back-project__head">
+            <h2 class="modal__head">Back this project</h2>
+            <div class="modal__close">
+              <img src="images/icon-close-modal.svg" alt="" />
+            </div>
+          </div>
+
+          <p class="modal__intro">
+            Want to support us in bringing Mastercraft Bamboo Monitor Riser out
+            in the world?
+          </p>
+
+          <form action="" id="chooseOption">
+            <!-- pledge options to be generated from JS -->
+          </form>
+        </div>
+      </section>
+
+      <!-- ==== SUCCESS MODAL ==== -->
+      <section class="modal" id="success">
+        <div class="section__wrapper">
+          <img src="images/icon-check.svg" alt="" />
+          <h4>Thanks for your support!</h4>
+          <p>
+            Your pledge brings us one step closer to sharing Mastercraft Bamboo
+            Monitor Riser worldwide. You will get an email once our campaign is
+            completed.
+          </p>
+          <button class="button">Got it!</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Success modal end -->
+    <script src="app2.js"></script>
+  </body>
+</html>
