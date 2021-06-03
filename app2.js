@@ -376,7 +376,7 @@ successBtn.addEventListener("click", (btn) => {
   //update amount on page
   modalDisplay(successModal, "hide");
   overlayDisplay("hide");
-  overlay.removeEventListener("click", () => {});
+  overlay.removeEventListener("click", overlayDisplay("hide"));
   progressSection.scrollIntoView({ behavior: "smooth" });
   progressBar.style.width = `0%`;
 
