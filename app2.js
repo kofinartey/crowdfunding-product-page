@@ -73,7 +73,7 @@ function makeItems(item) {
 /*===== CREATE MODAL OPTIONS =====*/
 function makeOption(option) {
   return `
-    <div class="option item">
+    <div class="option">
       <div class="select">
         <input 
           type="radio" 
@@ -99,7 +99,9 @@ function makeOption(option) {
         <p>Enter your pledge</p>
         <div class="make__pledge">
           <input type="text" name="pledge" placeholder="0.00" />
-          <button class="button continue">Continue</button>
+          <button class="button continue" id="${
+            option.id
+          }Cont">Continue</button>
         </div>
         <small>Please enter a valid pledge</small>
       </div>
@@ -117,6 +119,8 @@ function stock(data) {
   `;
 }
 
+// const optionRadios = document.querySelectorAll(".select input");
+// const pledgeOptions = document.querySelectorAll(".option");
 const hamburger = document.querySelector(".hamburger");
 const overlay = document.querySelector(".overlay");
 const mobileMenu = document.querySelector(".mobile__menu");
@@ -127,11 +131,12 @@ const selectReward = document.querySelectorAll(".open__modal");
 const [supportModal, successModal] = modals;
 const selects = document.querySelectorAll(".select");
 const continueBtns = document.querySelectorAll(".continue");
+const successBtn = document.querySelector("#success .button");
+const progressBar = document.querySelector(".pb__fill");
 
-// const optionRadios = document.querySelectorAll(".select input");
-// const pledgeOptions = document.querySelectorAll(".option");
-
-const target = 100000;
+// let currentTotalString = document.querySelector("#currentTotal").innerHTML;
+// let currentTotal = parseInt(currentTotalString.replace(",", ""));
+// let pledge = 0;
 
 //hamburger
 hamburger.addEventListener("click", () => {
@@ -210,19 +215,15 @@ selectReward.forEach((reward) => {
     modalDisplay(supportModal, "show");
     //get button id
     const rewardBtnId = reward.id;
-    console.log(rewardBtnId);
     //go through all the inputs for the various options
     const optionInputs = document.querySelectorAll(".select input");
-    console.log(optionInputs);
     optionInputs.forEach((option) => {
       //get their IDs
       let inputId = option.id;
       //for all input IDs , if optionId contains a select Id...
       if (rewardBtnId.indexOf(inputId) != -1) {
-        console.log(inputId);
         //...choose that input.
         let inputToSelect = document.querySelector(`.select #${inputId}`);
-        console.log(inputToSelect);
         //apply .selected class to it's grandparent
         inputToSelect.parentElement.parentElement.classList.add("selected");
 
@@ -252,6 +253,7 @@ selects.forEach((select) => {
   });
 });
 
+//clear a seletion
 function clearSelection() {
   let currentSelection = document.querySelector(".option.selected");
   let currentInput = document.querySelector(".selected .pledge__form input");
@@ -277,18 +279,130 @@ continueBtns.forEach((btn) => {
   let pledgeForm = btn.parentElement.parentElement;
   btn.addEventListener("click", (e) => {
     e.preventDefault();
-    if (userInput.value === "") {
-      console.log("empty input");
-      pledgeForm.classList.add("error");
-    } else if (isNaN(userInput.value.trim())) {
-      console.log("error: string");
-      pledgeForm.classList.add("error");
-    } else {
-      pledgeForm.classList.remove("error");
-      modalDisplay(supportModal, "hide");
-    }
-    setTimeout(() => {
-      modalDisplay(successModal, "show");
-    }, 1000);
+    //get pledge limit for the repective option
+    //go through data and find object that matches the button's id
+    let btnId = btn.id;
+    optionsData.forEach((option) => {
+      if (btnId.indexOf(option.id) != -1) {
+        let limit = option.minPledge;
+
+        //checking inputs
+        if (userInput.value < limit) {
+          console.log("amount too small for option");
+          pledgeForm.classList.add("error");
+        } else if (userInput.value === "") {
+          console.log("empty input");
+          pledgeForm.classList.add("error");
+        } else if (isNaN(userInput.value.trim())) {
+          console.log("error: string");
+          pledgeForm.classList.add("error");
+        } else {
+          pledgeForm.classList.remove("error");
+          modalDisplay(supportModal, "hide");
+          setTimeout(() => {
+            modalDisplay(successModal, "show");
+          }, 1000);
+          // save pledge
+          userPledge = parseInt(userInput.value);
+          updateStock();
+        }
+      }
+    });
   });
 });
+
+//update stock (to be run when pledge inputs are valid)
+function updateStock() {
+  //select selected option,...
+  //...get it's id. NB: only its radio button has an Id, so get that
+  let selectedInput = document.querySelector(".selected input");
+  let selectedOption = selectedInput.parentElement.parentElement;
+  let selectedOptionId = selectedInput.id;
+  //find the data with the selected id
+  optionsData.forEach((data) => {
+    if (data.stock) {
+      /*the above line checks if data has stocks. thus we ignore the "no-reward" pledge */
+      if (data.id == selectedOptionId) {
+        // decrement stock for the data that matches the id
+        data.stock--;
+        // display stock inside options selector in modal
+        let stockDisplay1 = selectedOption.querySelector(".stock .num");
+        stockDisplay1.innerHTML = data.stock;
+        // display stock inside items selector main page (about section)
+        let itemCollection = document.querySelectorAll(".item");
+        //loop through items displayed in about and find one with an ID that matches data.ID
+        itemCollection.forEach((item) => {
+          let itemButton = item.querySelector("button");
+          let itemId = itemButton.id;
+          if (itemId.indexOf(data.id) != -1) {
+            let interstedStock =
+              itemButton.previousElementSibling.querySelector(".num");
+            interstedStock.innerHTML = data.stock;
+            //run this when out of stock
+            if (data.stock == 0) {
+              itemButton.innerHTML = "Out of Stock";
+              item.classList.add("out__of__stock");
+            }
+          }
+        });
+
+        if (data.stock == 0) {
+          // select item and apply inactive styles to it
+          selectedOption.classList.add("out__of__stock");
+          console.log(data.id + "is out of stock");
+        }
+      }
+    }
+  });
+  //decrement stock by 1
+  //display new stock upon success event
+}
+
+//handle math on success
+const TARGET = 100000;
+let totalPledged = 50914;
+let totalBackers = 5007;
+let userPledge = 0;
+let pledgeDisplay = document.querySelector("#currentTotal");
+let backersDisplay = document.querySelector(".total__backers .num");
+let barLength;
+
+updateProgress(); /*running this ensures that the numbers in js are displayed when the page first loads*/
+
+successBtn.addEventListener("click", (btn) => {
+  const progressSection = document.querySelector(".progress");
+  totalPledged = totalPledged + userPledge;
+  totalBackers = totalBackers + 1;
+  //update amount on page
+  modalDisplay(successModal, "hide");
+  overlayDisplay("hide");
+  overlay.removeEventListener("click", () => {});
+  progressSection.scrollIntoView({ behavior: "smooth" });
+  progressBar.style.width = `0%`;
+
+  setTimeout(() => {
+    progressBar.style.transition = "all 0.6s ease-in-out";
+    resetModal();
+    updateProgress();
+    setTimeout(() => {
+      progressBar.style.transition = "all 0s ease-in-out";
+    }, 10);
+  }, 500);
+});
+
+function updateProgress() {
+  let totalPledgedStr = totalPledged.toString();
+  let totalBackersStr = totalBackers.toString();
+  // for (let i = 3; i < totalPledgedStr.length; i += 3) {
+  //   totalPledgedStr =
+  //     totalPledgedStr.slice(0, -i) + "," + totalPledgedStr.slice(-1);
+  // }
+  // for (let i = 3; i < totalBackersStr.length; i += 3) {
+  //   totalBackersStr =
+  //     totalBackersStr.slice(0, -i) + "," + totalBackersStr.slice(-1);
+  // }
+  pledgeDisplay.innerHTML = totalPledgedStr;
+  backersDisplay.innerHTML = totalBackersStr;
+  barLength = (totalPledged / TARGET) * 100;
+  progressBar.style.width = `${barLength}%`;
+}
