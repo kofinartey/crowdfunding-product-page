@@ -148,6 +148,7 @@ hamburger.addEventListener("click", () => {
     hamburger.classList.add("hamburger__open");
     overlay.classList.add("overlay--show");
     mobileMenu.classList.add("mobile__menu--show");
+    overlay.addEventListener("click", overlayEvents);
   }
 });
 
@@ -160,12 +161,14 @@ function overlayDisplay(status) {
   }
 }
 
-overlay.addEventListener("click", () => {
+function overlayEvents() {
   overlayDisplay("hide");
   modalDisplay(supportModal, "hide");
   modalDisplay(successModal, "hide");
+  mobileMenu.classList.remove("mobile__menu--show");
+  hamburger.classList.remove("hamburger__open");
   resetModal();
-});
+}
 
 //bookmark activity
 bookmark.addEventListener("click", () => {
@@ -183,6 +186,7 @@ bookmark.addEventListener("click", () => {
 backProject.addEventListener("click", () => {
   overlayDisplay("show");
   modalDisplay(supportModal, "show");
+  overlay.addEventListener("click", overlayEvents);
 });
 
 modalClose.addEventListener("click", () => {
@@ -200,7 +204,7 @@ function modalDisplay(modalName, displayStatus) {
       modalName.style.pointerEvents = "all";
     }, 300);
 
-    overlayDisplay("show");
+    // overlayDisplay("show");
   }
   if (displayStatus === "hide") {
     modalName.style.opacity = 0;
@@ -302,6 +306,7 @@ continueBtns.forEach((btn) => {
           setTimeout(() => {
             modalDisplay(successModal, "show");
           }, 1000);
+          overlay.removeEventListener("click", overlayEvents);
           // save pledge
           userPledge = parseInt(userInput.value);
           updateStock();
