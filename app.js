@@ -170,7 +170,6 @@ function overlayEvents() {
   resetModal();
 }
 
-//bookmark activity
 bookmark.addEventListener("click", () => {
   const bookmarkText = document.querySelector("#bkmk");
   if (bookmark.classList.contains("bookmark__active")) {
@@ -182,7 +181,6 @@ bookmark.addEventListener("click", () => {
   }
 });
 
-//back this project
 backProject.addEventListener("click", () => {
   overlayDisplay("show");
   modalDisplay(supportModal, "show");
@@ -193,7 +191,6 @@ modalClose.addEventListener("click", () => {
   modalDisplay(supportModal, "hide");
   overlayDisplay("hide");
   resetModal();
-  // overlayDisplay("hide");
 });
 
 //modal show or hide
@@ -203,13 +200,11 @@ function modalDisplay(modalName, displayStatus) {
       modalName.style.opacity = 1;
       modalName.style.pointerEvents = "all";
     }, 300);
-
-    // overlayDisplay("show");
   }
+
   if (displayStatus === "hide") {
     modalName.style.opacity = 0;
     modalName.style.pointerEvents = "none";
-    // overlayDisplay("hide");
   }
 }
 
@@ -217,6 +212,7 @@ function modalDisplay(modalName, displayStatus) {
 selectReward.forEach((reward) => {
   reward.addEventListener("click", () => {
     modalDisplay(supportModal, "show");
+    overlayDisplay("show");
     //get button id
     const rewardBtnId = reward.id;
     //go through all the inputs for the various options
@@ -257,7 +253,6 @@ selects.forEach((select) => {
   });
 });
 
-//clear a seletion
 function clearSelection() {
   let currentSelection = document.querySelector(".option.selected");
   let currentInput = document.querySelector(".selected .pledge__form input");
@@ -270,7 +265,6 @@ function clearSelection() {
   }
 }
 
-//reset modal
 function resetModal() {
   clearSelection();
   modalClose.scrollIntoView();
@@ -359,8 +353,6 @@ function updateStock() {
       }
     }
   });
-  //decrement stock by 1
-  //display new stock upon success event
 }
 
 //handle math on success
@@ -398,14 +390,6 @@ successBtn.addEventListener("click", (btn) => {
 function updateProgress() {
   let totalPledgedStr = totalPledged.toString();
   let totalBackersStr = totalBackers.toString();
-  // for (let i = 3; i < totalPledgedStr.length; i += 3) {
-  //   totalPledgedStr =
-  //     totalPledgedStr.slice(0, -i) + "," + totalPledgedStr.slice(-1);
-  // }
-  // for (let i = 3; i < totalBackersStr.length; i += 3) {
-  //   totalBackersStr =
-  //     totalBackersStr.slice(0, -i) + "," + totalBackersStr.slice(-1);
-  // }
   pledgeDisplay.innerHTML = totalPledgedStr;
   backersDisplay.innerHTML = totalBackersStr;
   barLength = (totalPledged / TARGET) * 100;
