@@ -168,6 +168,7 @@ function overlayEvents() {
   mobileMenu.classList.remove("mobile__menu--show");
   hamburger.classList.remove("hamburger__open");
   resetModal();
+  console.log("overlay clicked");
 }
 
 bookmark.addEventListener("click", () => {
